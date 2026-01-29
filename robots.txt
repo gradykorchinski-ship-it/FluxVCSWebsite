@@ -1,0 +1,11 @@
+# FluxVCS Robots.txt
+# https://vcs.fluxlinux.xyz
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://vcs.fluxlinux.xyz/sitemap.xml
+
+# Crawl-delay for politeness (optional)
+Crawl-delay: 1
