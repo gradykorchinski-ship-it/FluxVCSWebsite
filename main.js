@@ -94,50 +94,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Inject Retro Warning Banner
     createRetroBanner();
 
-    // Download Counter Logic
-    initDownloadCounter();
 });
 
-function initDownloadCounter() {
-    const counterEl = document.getElementById('download-count');
-    const NAMESPACE = 'fluxvcs';
-    const KEY = 'downloads';
-
-    // Fetch current count
-    if (counterEl) {
-        fetch('https://api.counterapi.dev/v1/' + NAMESPACE + '/' + KEY + '/')
-            .then(function (res) {
-                if (!res.ok) throw new Error('API Error');
-                return res.json();
-            })
-            .then(function (data) {
-                if (data.count !== undefined) {
-                    counterEl.textContent = data.count.toLocaleString();
-                } else {
-                    counterEl.textContent = '1,248'; // Fallback
-                }
-            })
-            .catch(function () {
-                counterEl.textContent = '1,248'; // Fallback
-            });
-    }
-
-    // Attach listener to all download buttons
-    const downloadBtns = [
-        document.getElementById('home-download-btn'),
-        document.getElementById('linux-download-btn')
-    ];
-
-    downloadBtns.forEach(function (btn) {
-        if (btn) {
-            btn.addEventListener('click', function () {
-                // Increment count on server (uses GET /up/)
-                fetch('https://api.counterapi.dev/v1/' + NAMESPACE + '/' + KEY + '/up/')
-                    .catch(function (err) { console.error('Error incrementing counter:', err); });
-            });
-        }
-    });
-}
 
 function createRetroBanner() {
     const banner = document.createElement('div');
